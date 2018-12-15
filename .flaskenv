@@ -1,3 +1,4 @@
 # envs
 FLASK_APP=myblog
 FLASK_ENV=development
+SQLALCHEMY_TRACK_MODIFICATIONS=False
