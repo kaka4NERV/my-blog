@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h2>{% block title %}Register{% endblock %}</h2>
+    <h2>{% block title %}Create{% endblock %}</h2>
 {% endblock %}
 
 {% block content %}
     <form method="post">
         {{ form.csrf_token }}
-        {{ form.username.label }}{{ form.username }}<br>
-        {% for message in form.username.errors %}
+        {{ form.title.label }}{{ form.title }}<br>
+        {% for message in form.title.errors %}
             <small class="error">{{ message }}</small>
         {% endfor %}
-        {{ form.password.label }}{{ form.password }}<br>
-        {% for message in form.password.errors %}
+        {{ form.body.label }}{{ form.body }}<br>
+        {% for message in form.body.errors %}
             <small class="error">{{ message }}</small>
         {% endfor %}
         {{ form.submit }}<br>

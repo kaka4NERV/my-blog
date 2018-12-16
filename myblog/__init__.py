@@ -15,8 +15,14 @@ def create_app():
     from myblog.models import db
     db.init_app(app)
 
-    @app.route('/')
-    def hello():
-        return 'Hello boy!'
+    # @app.route('/hello')
+    # def hello():
+    #     return 'Hello boy!'
+
+    from . import blog
+    app.register_blueprint(blog.bp)
+
+    from . import auth
+    app.register_blueprint(auth.bp)
 
     return app
