@@ -10,9 +10,8 @@ bp = Blueprint('blog', __name__)
 
 @bp.route('/')
 def index():
-    form = DeleteForm()
     posts = Post.query.order_by(Post.timestamp).all()
-    return render_template('index.html', posts=posts, form=form)
+    return render_template('index.html', posts=posts)
 
 
 @bp.route('/create', methods=['GET', 'POST'])
@@ -33,13 +32,22 @@ def create():
 @bp.route('/<int:id>/update', methods=['GET', 'POST'])
 @login_required
 def update(id):
-    form = UpdateForm()
+    form1 = UpdateForm()
+    form2 = DeleteForm()
     post = Post.query.get(id)
-    if form.validate_on_submit():
-        post.title = form.title.data
-        post.body = form.body.data
+    if form1.validate_on_submit():
+        post.title = form1.title.data
+        post.body = form1.body.data
         db.session.commit()
         return redirect(url_for('blog.index'))
-    form.title.data = post.title
-    form.body.data = post.body
-    return render_template('update.html', form=form)
+    form1.title.data = post.title
+    form1.body.data = post.body
+    return render_template('update.html', form1=form1, form2=form2, post=post)
+
+@bp.route('/<int:id>/delete', methods=['POST'])
+@login_required
+def delete(id):
+    post = Post.query.get(id)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect(url_for('blog.index'))

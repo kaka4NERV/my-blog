@@ -6,15 +6,20 @@
 
 {% block content %}
     <form method="post">
-        {{ form.csrf_token }}
-        {{ form.title.label }}{{ form.title }}<br>
-        {% for message in form.title.errors %}
+        {{ form1.csrf_token }}
+        {{ form1.title.label }}{{ form1.title }}<br>
+        {% for message in form1.title.errors %}
             <small class="error">{{ message }}</small>
         {% endfor %}
-        {{ form.body.label }}{{ form.body }}<br>
-        {% for message in form.body.errors %}
+        {{ form1.body.label }}{{ form1.body }}<br>
+        {% for message in form1.body.errors %}
             <small class="error">{{ message }}</small>
         {% endfor %}
-        {{ form.submit }}<br>
+        {{ form1.submit }}<br>
+    </form>
+    <hr>
+    <form action="{{ url_for('blog.delete', id=post.id) }}" method="post">
+        {{ form2.csrf_token }}
+        {{ form2.submit }}
     </form>
 {% endblock %}

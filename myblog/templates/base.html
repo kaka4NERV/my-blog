@@ -4,7 +4,7 @@
     {% block head %}
         <meta charset="UTF-8">
         <title>{% block title %}Template - MyBlog{% endblock %}</title>
-        {% block style %}{% endblock %}
+        {% block style %}<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">{% endblock %}
     {% endblock %}
 </head>
 <body>
@@ -12,6 +12,8 @@
     <h1>MyBlog</h1>
     <ul>
         <li><a href="{{ url_for('blog.index') }}">Home</a></li>
+        <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+        <li><a href="{{ url_for('auth.login') }}">Log in</a></li>
     </ul>
 </nav>
 <main>
